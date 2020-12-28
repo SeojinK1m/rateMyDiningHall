@@ -4,7 +4,7 @@
 
 <form method="POST" name="search">
     {% csrf_token %}
-    <input type="search">
+    <input type="search" name="q">
     <input type="submit" value="search">
 </form>
 <a href="{% url 'write' %}">write a review</a>

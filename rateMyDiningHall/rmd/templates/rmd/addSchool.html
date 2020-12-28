@@ -1,0 +1,22 @@
+{% extends "rmd/layout.html" %}
+
+{% block body %}
+<h2>Add your school!</h2>
+<form method="POST">
+    {% csrf_token %}
+    <h3>Enter your school name</h3>
+    {{form.schoolName}}
+    <h3>Would you like to add a review for a dining hall or a restaurant?</h3>
+    {{form.R_or_D}}
+    <h3>Enter the restaurant/dining hall's name</h3>
+    {{form.eateryName}}
+    <h3>How would you rate this restaurant?</h3>
+    {{form.rating}}
+    <h3>Please add a comment regarding your experiences</h3>
+    {{form.comment}}
+    <div>
+        <input type="submit">
+    </div>
+</form>
+
+{% endblock body %}

@@ -1,0 +1,19 @@
+{% extends "rmd/layout.html" %}
+
+{% block body %}
+<div name="addItHere">
+    <h2>School results for "{{query}}"</h2>
+    <h3>
+        Don't see your school? Add it <a href="{% url 'addSchool' %}">here</a>
+    </h3>
+</div>
+
+<div name="results">
+    <ul>
+        {% for school in searchResult %}
+        <li>{{school.name}}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock body %}

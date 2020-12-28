@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
 from django import forms
@@ -22,6 +22,13 @@ class addSchoolForm(forms.Form):
     rating = forms.ChoiceField(choices=RATINGS, widget=forms.RadioSelect)
     comment = forms.CharField(widget = forms.Textarea)
 
+class selectSchoolForm(forms.Form):
+    schools = []
+    for school in School.objects.all():
+        choice = (school.name, school.name)
+        schools.append(choice)
+    dropdown = forms.ChoiceField(choices=schools, widget=forms.Select)
+
 # Create your views here
 def index(request):
     if request.method == 'POST':
@@ -35,10 +42,11 @@ def index(request):
 
 def write(request):
     if request.method == 'POST':
-        return render(request, "rmd/thanks.html")
-    schools = School.objects.all()
+        school = request.POST['dropdown']
+        return redirect("write/"+school)
+    form = selectSchoolForm()
     return render(request, "rmd/write.html", {
-        'schools':schools,
+        'schools':form,
     })
 
 def addSchool(request):
@@ -53,17 +61,20 @@ def addSchool(request):
             eateryName = form["eateryName"].value()
             rating = form["rating"].value()
             comment = form["comment"].value()
+            urlName = schoolName
+            urlName = urlName.split(" ")
+            urlName = "".join(urlName)
 
             #put info to databases and save
-            newSchool = School(name=schoolName)
+            newSchool = School(name=schoolName, urlName=urlName)
             newSchool.save()
 
             if R_or_D=='r':
-                newE = Restaurant(name=eateryName, school=newSchool)
+                newE = Restaurant(name=eateryName, school=newSchool, urlName=urlName)
                 newE.save()
                 newR = restaurantReview(rating=rating, comment=comment, restaurant=newE)
             else:
-                newE = diningHall(name=eateryName, school=newSchool)
+                newE = diningHall(name=eateryName, school=newSchool, urlName=urlName)
                 newE.save()
                 newR = diningHallReview(rating=rating, comment=comment, diningHall=newE)
             newR.save()
@@ -76,5 +87,13 @@ def addSchool(request):
         'form':form
     })
 
-def school(request):
-    return HttpResponse("hi")
+def school(request, schoolName):
+    school = School.objects.get(urlName=schoolName)
+    restaurants = Restaurant.objects.filter(school=school)
+    diningHalls = diningHall.objects.filter(school=school)
+    
+    return render(request, "rmd/school.html", {
+        'school':school.name,
+        'restaurants':restaurants,
+        'diningHalls':diningHalls
+    })

@@ -3,17 +3,20 @@
 {% block body %}
 <div name="addItHere">
     <h2>School results for "{{query}}"</h2>
-    <h3>
-        Don't see your school? Add it <a href="{% url 'addSchool' %}">here</a>
-    </h3>
 </div>
 
 <div name="results">
     <ul>
         {% for school in searchResult %}
-        <li>{{school.name}}</li>
+        <li>
+            <a href={{school.urlName}}>{{school.name}}</a>
+        </li>
         {% endfor %}
     </ul>
 </div>
+
+<h3>
+    Don't see your school? Add it <a href="{% url 'addSchool' %}">here</a>
+</h3>
 
 {% endblock body %}

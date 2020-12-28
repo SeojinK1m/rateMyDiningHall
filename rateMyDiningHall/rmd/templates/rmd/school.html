@@ -1,0 +1,17 @@
+{% extends "rmd/layout.html" %}
+
+{% block body %}
+<h1>{{school}}</h1>
+<h3>Dining Halls</h3>
+<ul>
+    {% for diningHall in diningHalls %}
+    <li>{{diningHall.name}}</li>
+    {% endfor %}
+</ul>
+<h3>Restaurants</h3>
+<ul>
+    {% for restaurant in restaurants %}
+    <li>{{restaurant.name}}</li>
+    {% endfor %}
+</ul>
+{% endblock body %}

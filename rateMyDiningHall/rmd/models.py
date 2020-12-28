@@ -3,13 +3,16 @@ from django.db import models
 # Create your models here.
 class School(models.Model):
     name = models.CharField(max_length=128)
+    urlName = models.CharField(max_length=128)
 
 class diningHall(models.Model):
     name = models.CharField(max_length=128)
+    urlName = models.CharField(max_length=128)
     school = models.ForeignKey(School, on_delete=models.CASCADE)
 
 class Restaurant(models.Model):
     name = models.CharField(max_length=128)
+    urlName = models.CharField(max_length=128)
     school = models.ForeignKey(School, on_delete=models.CASCADE)
 
 class diningHallReview(models.Model):

@@ -59,12 +59,10 @@ def addSchool(request):
             comment = form["comment"].value()
 
             urlName = schoolName
-            urlName = urlName.split(" ")
-            urlName = "".join(urlName)
+            urlName = urlName.replace(" ", "")
 
             urlEName = eateryName
-            urlEName = urlEName.split(" ")
-            urlEName = "".join(urlName)
+            urlEName = urlEName.replace(" ", "")
 
             #put info to databases and save
             newSchool = School(name=schoolName, urlName=urlName)
@@ -149,9 +147,7 @@ def addDiningHall(request, schoolName):
             comment = form["comment"].value()
 
             urlName = eateryName
-            if " " in urlName:
-                urlName = urlName.split(" ")
-                urlName = urlName.join("")
+            urlName = urlName.replace(" ", "")
 
             diningHallNew = diningHall(name=eateryName, school=school, urlName=urlName)
             diningHallNew.save()
@@ -178,9 +174,7 @@ def addRestaurant(request, schoolName):
             comment = form["comment"].value()
 
             urlName = eateryName
-            if " " in urlName:
-                urlName = urlName.split(" ")
-                urlName = urlName.join("")
+            urlName = urlName.replace(" ", "")
 
             restaurantNew = Restaurant(name=eateryName, school=school, urlName=urlName)
             restaurantNew.save()
@@ -242,3 +236,26 @@ def addRestaurantReview(request, schoolName, restaurantName):
         'eatery':restaurant,
         'form':form
     })
+
+def diningHallPage(request, schoolName, diningHallName):
+    school = School.objects.get(urlName=schoolName)
+    dininghall = diningHall.objects.get(urlName=diningHallName)
+    reviews = diningHallReview.objects.filter(diningHall=dininghall)
+
+    return render(request, "rmd/page.html", {
+        'school':school,
+        'eatery':dininghall,
+        'reviews':reviews
+    })
+
+def restaurantPage(request, schoolName, diningHallName):
+    school = School.objects.get(urlName=schoolName)
+    restaurant = Restaurant.objects.get(urlName=restaurantName)
+    reviews = restaurantReview.objects.filter(restaurant=restaurant)
+
+    return render(request, "rmd/page.html", {
+        'school':school,
+        'eatery':restaurant,
+        'reviews':reviews
+    })
+

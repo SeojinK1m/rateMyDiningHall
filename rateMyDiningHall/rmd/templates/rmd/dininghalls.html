@@ -5,7 +5,11 @@
 <h3>Dining Halls</h3>
 <ul>
     {% for dininghall in diningHalls %}
-    <li>{{dininghall.name}}, {{avgDRatings|getAvgRating:dininghall.name}}</li>
+    <li>
+        <a href="dininghalls/{{dininghall.urlName}}">
+            {{dininghall.name}}, {{avgDRatings|getAvgRating:dininghall.name}}
+        </a>
+    </li>
     {% endfor %}
 </ul>
 <h3>Don't see your dining hall? Add it <a href="dininghalls/add">here</a></h3>

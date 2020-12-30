@@ -9,6 +9,8 @@ urlpatterns = [
     path('<str:schoolName>/restaurants', views.restaurants, name='restaurants'),
     path('<str:schoolName>/dininghalls/add', views.addDiningHall, name='addDiningHall'),
     path('<str:schoolName>/restaurants/add', views.addRestaurant, name='addRestaurant'),
-    path('<str:schoolName>/diningHalls/<str:diningHallName>', views.addDiningHallReview, name='addDHR'),
-    path('<str:schoolName>/restaurants/<str:restaurantName>', views.addRestaurantReview, name='addRR')
+    path('<str:schoolName>/dininghalls/<str:diningHallName>', views.diningHallPage, name='addDHR'),
+    path('<str:schoolName>/restaurants/<str:restaurantName>', views.restaurantPage, name='addRR'),
+    path('<str:schoolName>/dininghalls/<str:diningHallName>/add', views.addDiningHallReview, name='addDHR'),
+    path('<str:schoolName>/restaurants/<str:restaurantName>/add', views.addRestaurantReview, name='addRR'),
 ]

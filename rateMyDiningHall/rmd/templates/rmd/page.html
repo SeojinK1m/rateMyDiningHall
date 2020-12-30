@@ -1,0 +1,11 @@
+{% extends "rmd/layout.html" %}
+
+{% block body %}
+<h1>{{eatery.name}}</h1>
+<ul>   
+    {% for review in reviews %}
+        <li>{{review.rating}}, {{review.comment}}</li>
+    {% endfor %}  
+</ul>
+<a href="{{eatery.urlName}}/add">Add a review</a>
+{% endblock body %}

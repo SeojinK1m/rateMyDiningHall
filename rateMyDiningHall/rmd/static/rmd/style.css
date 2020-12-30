@@ -45,3 +45,14 @@
 #aboutUs {
     text-align: left;
 }
+
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+#top {
+    background-color: rgb(255, 217, 195);
+    opacity: 100%;
+    padding: 3% 2%;
+}

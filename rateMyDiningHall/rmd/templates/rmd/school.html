@@ -2,16 +2,14 @@
 
 {% block body %}
 <h1>{{school}}</h1>
-<h3>Dining Halls</h3>
-<ul>
-    {% for diningHall in diningHalls %}
-    <li>{{diningHall.name}}</li>
-    {% endfor %}
-</ul>
-<h3>Restaurants</h3>
-<ul>
-    {% for restaurant in restaurants %}
-    <li>{{restaurant.name}}</li>
-    {% endfor %}
-</ul>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Dining Halls" name="dininghalls">
+</form>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Restaurants" name="restaurants">
+</form>
 {% endblock body %}

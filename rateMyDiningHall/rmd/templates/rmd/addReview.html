@@ -1,0 +1,15 @@
+{% extends "rmd/layout.html" %}
+
+{% block body %}
+<h3>{{eatery.name}}</h3>
+<form method="POST">
+    {% csrf_token %}
+    <h3>How would you rate this restaurant?</>
+    {{form.rating}}
+    <h3>Please add a comment regarding your experiences</h3>
+    {{form.comment}}
+    <div>
+        <input type="submit">
+    </div>
+</form>
+{% endblock body %}

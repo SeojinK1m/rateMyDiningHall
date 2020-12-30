@@ -1,0 +1,16 @@
+{% extends "rmd/layout.html" %}
+
+{% block body %}
+<h1>{{school.name}}</h1>
+<h3>Restaurants</h3>
+<ul>
+    {% for restaurant in restaurants %}
+    <li>
+        <a href="restaurants/{{restaurant.name}}">
+            {{restaurant.name}}, {{avgRRatings|getAvgRating:restaurant.name}}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+<h3>Don't see your dining hall? Add it <a href="restaurants/add">here</a></h3>
+{% endblock body %}

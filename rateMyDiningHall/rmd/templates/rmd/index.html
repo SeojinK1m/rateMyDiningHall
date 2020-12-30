@@ -1,11 +1,26 @@
 {% extends "rmd/layout.html" %}
 
 {% block body %}
-
-<form method="POST" name="search">
+{% load static %}
+<img src="{% static 'rmd/dininghall.jpg' %}"  id="dininghall">
+<form method="POST" class="search">
     {% csrf_token %}
-    <input type="search" name="q">
-    <input type="submit" value="search">
+    <input type="text" name="q" class="searchbar" placeholder="Search for a school, restaurant, or dining hall">
+    <div>
+        <input type="submit" value="search" class="searchButton">
+    </div>  
 </form>
-<a href="{% url 'write' %}">write a review</a>
+
+<div id="about">
+    <table>
+        <tr>
+            <td>
+                <img src="{% static 'rmd/plate.jpg' %}" id="plate">
+            </td>
+            <td>
+                <h3 id="aboutUs">A food review site for students, by students</h3>
+            </td>
+        </tr>
+    </table>
+</div>
 {% endblock body %}

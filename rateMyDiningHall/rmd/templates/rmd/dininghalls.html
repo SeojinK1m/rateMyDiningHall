@@ -1,0 +1,13 @@
+{% extends "rmd/layout.html" %}
+
+{% block body %}
+<h1>{{school}}</h1>
+<h3>Dining Halls</h3>
+<ul>
+    {% for dininghall in diningHalls %}
+    <li>{{dininghall.name}}, {{avgDRatings|getAvgRating:dininghall.name}}</li>
+    {% endfor %}
+</ul>
+<h3>Don't see your dining hall? Add it <a href="dininghalls/add">here</a></h3>
+
+{% endblock body %}

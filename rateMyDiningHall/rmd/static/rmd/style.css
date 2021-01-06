@@ -49,10 +49,164 @@
 body, html {
     margin: 0;
     padding: 0;
+    background-color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 #top {
     background-color: rgb(255, 217, 195);
     opacity: 100%;
-    padding: 3% 2%;
+    padding: 2% 1.5%;
+}
+
+.heading {
+    margin-left: 1%;
+}
+
+.subHeading {
+    margin-left: 1%;
+}
+
+.result {
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 90%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    list-style-type: none;
+    margin-bottom: 2%; /* Add some space below the input */
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.result a {
+    border: 1px solid #ddd; /* Add a border to all links */
+    background-color: #f6f6f6; /* Grey background color */
+    text-decoration: none; /* Remove default text underline */
+    color: black; /* Add a black text color */
+    padding: 4%;
+    display: block; /* Make it into a block element to fill the whole list */
+  }
+
+  .result a:hover:not(.header) {
+    background-color: #eee; /* Add a hover effect to all links, except for headers */
+  }
+
+  .DRButton {
+      border: 1px solid #ddd;
+      background-color: #f6f6f6;
+      color: rgb(0, 0, 0);
+      padding: 4%;
+      text-decoration: none;
+      cursor: pointer;
+      width: 80%;
+      text-align: center;
+      margin-bottom: 2%;
+      font-size: 16px;
+  }
+
+  .DR {
+      text-align: center;
+      margin-left: 1%;
+  }
+
+  .DRButton:hover {
+    background-color: #eee;
+  }
+
+  #DRS {
+      text-align: center;
+  }
+
+
+  .ratingScale {
+
+    -webkit-appearance: none;
+    width: 75%;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    }
+.ratingScale::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%; 
+    background: #4CAF50;
+    cursor: pointer;
+}
+    
+.ratingScale::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.ratingScale:hover {
+    opacity: 1;
+}
+
+.reviewContainer {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3%;
+    width: 68%;
+    margin-top: 3%;
+    text-align: center;
+    border: dotted 1px gray;
+    border-radius: 30px;
+    background-color: rgb(255, 247, 242);
+}
+
+
+.superContainer {
+    text-align: center;
+}
+
+
+.review {
+    vertical-align: middle;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    border: dotted 1px gray;
+    margin-bottom: 1.5%;
+    margin-top: 1.5%;
+    list-style-type: none;
+    display: table-row;
+}
+
+#about {
+    margin-left: auto;
+    margin-right: auto;
+    display: table-row;
+    width: 70%;
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+#featured {
+    text-align: center;
+    max-width: 100%;
+}
+.block {
+    display: inline-block;
+    width: 300px;
+    padding-top: 100;
+    padding-bottom: 100px;
+    border: dotted 1px gray;
+    background-color: rgb(255, 217, 195);
+    border-radius: 20px;
+    margin-right: 1.5%;
+    margin-left: 1.5%;
+    margin-bottom: 3%;
+}
+
+.checked {
+    color: orange;
 }

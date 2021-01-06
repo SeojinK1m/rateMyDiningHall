@@ -1,22 +1,31 @@
 {% extends "rmd/layout.html" %}
 
 {% block body %}
+{% load static %}
+<script src="{% static 'rmd/slider.js' %}" ></script>
+{% load static %}
+<script src="{% static 'rmd/check.js' %}"></script>
 <h2>Add your school!</h2>
-<form method="POST">
-    {% csrf_token %}
-    <h3>Enter your school name</h3>
-    {{form.schoolName}}
-    <h3>Would you like to add a review for a dining hall or a restaurant?</h3>
-    {{form.R_or_D}}
-    <h3>Enter the restaurant/dining hall's name</h3>
-    {{form.eateryName}}
-    <h3>How would you rate this restaurant?</h3>
-    {{form.rating}}
-    <h3>Please add a comment regarding your experiences</h3>
-    {{form.comment}}
-    <div>
-        <input type="submit">
-    </div>
-</form>
+
+<div class="reviewContainer">
+    <form method="POST" id="form1">
+        {% csrf_token %}
+        <h3>Enter your school name</h3>
+        {{form.schoolName}}
+        <h3>Would you like to add a review for a dining hall or a restaurant?</h3>
+        {{form.R_or_D}}
+        <h3>Enter the restaurant/dining hall's name</h3>
+        {{form.eateryName}}
+        <h3>How would you rate this restaurant?</h3>
+        <input type="range" class="ratingScale" min="1" max="5" step="0.5" name="rating" oninput="rate(value)">
+            <h3 id="r">3</h3>
+        <h3>Please add a comment regarding your experiences</h3>
+        {{form.comment}}
+        <div>
+            <input type="submit">
+        </div>
+    </form>
+</div>
+
 
 {% endblock body %}

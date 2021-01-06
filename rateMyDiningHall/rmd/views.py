@@ -4,28 +4,24 @@ from .models import *
 from django import forms
 from django.db.models import Avg
 from django.template.defaulttags import register
+import json
+
+alphanumeric = RegexValidator(r'^[a-zA-Z0-9_]+( [a-zA-Z0-9_]+)*$', 'Only alphanumeric characters are allowed.')
 
 class addReviewForm(forms.Form):
-    RATINGS = [
-        (1, '1'),
-        (2, '2'),
-        (3, '3'),
-        (4, '4'),
-        (5, '5')
-    ]
-    rating = forms.ChoiceField(choices=RATINGS, widget=forms.RadioSelect)
     comment = forms.CharField(widget = forms.Textarea)
 
 class addEateryForm(addReviewForm):
-    eateryName = forms.CharField(max_length=128)
+    eateryName = forms.CharField(max_length=128, validators=[alphanumeric])
 
 class addSchoolForm(addEateryForm):
     CHOICES = [
         ('r','Restaurant'),
         ('d','Dining Hall')
     ]
-    schoolName = forms.CharField(max_length=128)
+    schoolName = forms.CharField(max_length=128, validators=[alphanumeric])
     R_or_D = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect)
+
 
 class selectSchoolForm(forms.Form):
     schools = []
@@ -55,7 +51,7 @@ def addSchool(request):
             schoolName = form["schoolName"].value()
             R_or_D = form["R_or_D"].value()
             eateryName = form["eateryName"].value()
-            rating = form["rating"].value()
+            rating = request.POST['rating']
             comment = form["comment"].value()
 
             urlName = schoolName
@@ -112,10 +108,13 @@ def dininghalls(request, schoolName):
         avgDRatings[dininghall.name]=rating
     print(avgDRatings)
 
-    return render(request, "rmd/dininghalls.html", {
+    js_adr = json.dumps(avgDRatings)
+
+    return render(request, "rmd/dininghalls.html", context={
         'school':school.name,
         'diningHalls':dininghalls,
-        'avgDRatings':avgDRatings
+        'avgDRatings':avgDRatings,
+        'js_adr':js_adr
     })
 
 
@@ -129,10 +128,13 @@ def restaurants(request, schoolName):
         avgRRatings[restaurant.name]=rating
     print(avgRRatings)
 
-    return render(request, "rmd/restaurants.html", {
+    js_arr = json.dumps(avgRRatings)
+
+    return render(request, "rmd/restaurants.html", context={
         'school':school,
         'restaurants':restaurants,
-        'avgRRatings':avgRRatings
+        'avgRRatings':avgRRatings,
+        'js_arr':js_arr
     })
 
 
@@ -143,7 +145,7 @@ def addDiningHall(request, schoolName):
         form = addEateryForm(request.POST)
         if form.is_valid():
             eateryName = form["eateryName"].value()
-            rating = form["rating"].value()
+            rating = request.POST['rating']
             comment = form["comment"].value()
 
             urlName = eateryName
@@ -170,7 +172,7 @@ def addRestaurant(request, schoolName):
         form = addEateryForm(request.POST)
         if form.is_valid():
             eateryName = form["eateryName"].value()
-            rating = form["rating"].value()
+            rating = request.POST['rating']
             comment = form["comment"].value()
 
             urlName = eateryName
@@ -199,7 +201,7 @@ def addDiningHallReview(request, schoolName, diningHallName):
     if request.method == 'POST':
         form = addReviewForm(request.POST)
         if form.is_valid():
-            rating = form["rating"].value()
+            rating = request.POST['rating']
             comment = form["comment"].value()
             newDHR = diningHallReview(diningHall=dininghall, rating=rating, comment=comment)
             newDHR.save()
@@ -222,7 +224,7 @@ def addRestaurantReview(request, schoolName, restaurantName):
     if request.method == 'POST':
         form = addReviewForm(request.POST)
         if form.is_valid():
-            rating = form["rating"].value()
+            rating = request.POST['rating']
             comment = form["comment"].value()
             newRR = restaurantReview(restaurant=restaurant, rating=rating, comment=comment)
             newRR.save()
@@ -248,7 +250,7 @@ def diningHallPage(request, schoolName, diningHallName):
         'reviews':reviews
     })
 
-def restaurantPage(request, schoolName, diningHallName):
+def restaurantPage(request, schoolName, restaurantName):
     school = School.objects.get(urlName=schoolName)
     restaurant = Restaurant.objects.get(urlName=restaurantName)
     reviews = restaurantReview.objects.filter(restaurant=restaurant)

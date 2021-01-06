@@ -1,15 +1,16 @@
 {% extends "rmd/layout.html" %}
 
 {% block body %}
-<h1>{{school}}</h1>
 
-<form method="POST">
+<h1 class="heading" id="DRS">{{school}}</h1>
+
+<form method="POST" class="DR">
     {% csrf_token %}
-    <input type="submit" value="Dining Halls" name="dininghalls">
+    <input type="submit" value="Dining Halls" name="dininghalls" class="DRButton">
 </form>
 
-<form method="POST">
+<form method="POST" class="DR">
     {% csrf_token %}
-    <input type="submit" value="Restaurants" name="restaurants">
+    <input type="submit" value="Restaurants" name="restaurants" class="DRButton">
 </form>
 {% endblock body %}

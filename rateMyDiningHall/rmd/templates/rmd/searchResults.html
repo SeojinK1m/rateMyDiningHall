@@ -2,20 +2,20 @@
 
 {% block body %}
 <div name="addItHere">
-    <h2>School results for "{{query}}"</h2>
+    <h2 class="heading">School results for "{{query}}"</h2>
 </div>
 
-<div name="results">
+<div name="results" class="results">
     <ul>
         {% for school in searchResult %}
-        <li>
+        <li class="result">
             <a href={{school.urlName}}>{{school.name}}</a>
         </li>
         {% endfor %}
     </ul>
 </div>
 
-<h3>
+<h3 class="subHeading">
     Don't see your school? Add it <a href="{% url 'addSchool' %}">here</a>
 </h3>
 

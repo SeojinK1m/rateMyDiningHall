@@ -11,16 +11,26 @@
     </div>  
 </form>
 
-<div id="about">
-    <table>
-        <tr>
-            <td>
-                <img src="{% static 'rmd/plate.jpg' %}" id="plate">
-            </td>
-            <td>
-                <h3 id="aboutUs">A food review site for students, by students</h3>
-            </td>
-        </tr>
-    </table>
+<div id="about" style="display: table;">
+
+    <div style="display: table-row">
+        <div style="width: 40%; display: table-cell;"> 
+            {% load static %}
+            <img src="{% static 'rmd/plate.jpg' %}" style="width: 100%;"></img>
+        </div>
+        <div style="display: table-cell; width: 50%; vertical-align: middle;">
+            <h3>
+                A Food Review Site For Students By Students
+            </h3>
+        </div>
+    </div>
+
+</div>
+
+<h2 style="text-align: center;">Featured Schools</h2>
+<div id="featured">
+    <div class="block">1</div>
+    <div class="block">2</div>
+    <div class="block">3</div>
 </div>
 {% endblock body %}

@@ -1,11 +1,26 @@
 {% extends "rmd/layout.html" %}
 
 {% block body %}
-<h1>{{eatery.name}}</h1>
-<ul>   
-    {% for review in reviews %}
-        <li>{{review.rating}}, {{review.comment}}</li>
-    {% endfor %}  
-</ul>
-<a href="{{eatery.urlName}}/add">Add a review</a>
+
+<h1 style="text-align: center;">Reviews for {{eatery.name}}...</h1>
+{% for review in reviews %}
+
+<div id="reviews">
+    <div style="display: table;" class="review">
+        <div style="display: table-row">
+            <div style="width: 6%; display: table-cell;"> 
+                {% load static %}
+                <img src="{% static 'rmd/plate.jpg' %}" style="width: 100%;"></img>
+            </div>
+            <div style="display: table-cell; width: 50%; vertical-align: middle;">
+                {{review.comment}}
+                <div>{{review.rating}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+{% endfor %}  
+<a href="{{eatery.urlName}}/add" style="text-align: center;">Add a review</a>
 {% endblock body %}

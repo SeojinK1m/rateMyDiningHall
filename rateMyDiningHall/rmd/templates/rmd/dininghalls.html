@@ -1,17 +1,43 @@
 {% extends "rmd/layout.html" %}
 
 {% block body %}
-<h1>{{school}}</h1>
-<h3>Dining Halls</h3>
-<ul>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+<h1 class="heading">{{school}}</h1>
+<h3 class="subHeading">Dining Halls</h3>
+<ul class="results">
     {% for dininghall in diningHalls %}
-    <li>
-        <a href="dininghalls/{{dininghall.urlName}}">
-            {{dininghall.name}}, {{avgDRatings|getAvgRating:dininghall.name}}
+    <li class="result">
+        <a href="dininghalls/{{dininghall.urlName}}" class="linkToD">
+           {{dininghall.name}}, {{avgDRatings|getAvgRating:dininghall.name}}
+            <div class="stars" id="{{dininghall.urlName}}">
+                <script>
+                    data_from_django = '{{ js_adr|safe }}';
+                    data_from_django = JSON.parse(data_from_django)
+                    rating = data_from_django['{{dininghall.name}}'].rating__avg
+                    rating = Math.round(rating)
+
+                    for(let i=0; i<rating; i++) {
+                        let star = document.createElement('span')
+                        star.className = 'fa fa-star checked'
+                        document.querySelector('#{{dininghall.urlName}}').append(star)
+                    }
+                    for(let i=0; i<5-rating; i++){
+                        let star = document.createElement('span')
+                        star.className = 'fa fa-star'
+                        document.querySelector('#{{dininghall.urlName}}').append(star)
+                    }
+                </script>
+            </div>
         </a>
+        
     </li>
     {% endfor %}
 </ul>
-<h3>Don't see your dining hall? Add it <a href="dininghalls/add">here</a></h3>
+<h3 class="subHeading">Don't see your dining hall? Add it <a href="dininghalls/add">here</a></h3>
+
 
 {% endblock body %}

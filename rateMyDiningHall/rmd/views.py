@@ -60,7 +60,6 @@ def addSchool(request):
             urlEName = eateryName
             urlEName = urlEName.replace(" ", "")
 
-            #put info to databases and save
             newSchool = School(name=schoolName, urlName=urlName)
             newSchool.save()
 
@@ -240,14 +239,22 @@ def addRestaurantReview(request, schoolName, restaurantName):
     })
 
 def diningHallPage(request, schoolName, diningHallName):
-    school = School.objects.get(urlName=schoolName)
+    #school = School.objects.get(urlName=schoolName)
     dininghall = diningHall.objects.get(urlName=diningHallName)
     reviews = diningHallReview.objects.filter(diningHall=dininghall)
 
-    return render(request, "rmd/page.html", {
-        'school':school,
+    Reviews={}
+    for review in reviews:
+        Reviews[review.id]=review.rating
+    print(Reviews)
+
+    js_adr = json.dumps(Reviews)
+
+    return render(request, "rmd/page.html", context={
+        #'school':school,
         'eatery':dininghall,
-        'reviews':reviews
+        'reviews':reviews,
+        'json':js_adr
     })
 
 def restaurantPage(request, schoolName, restaurantName):
@@ -255,9 +262,16 @@ def restaurantPage(request, schoolName, restaurantName):
     restaurant = Restaurant.objects.get(urlName=restaurantName)
     reviews = restaurantReview.objects.filter(restaurant=restaurant)
 
-    return render(request, "rmd/page.html", {
+    Reviews={}
+    for review in reviews:
+        Reviews[review.id]=review.rating
+    print(Reviews)
+
+    js_adr = json.dumps(Reviews)
+
+    return render(request, "rmd/page.html", context={
         'school':school,
         'eatery':restaurant,
-        'reviews':reviews
+        'reviews':reviews,
+        'json':js_adr
     })
-

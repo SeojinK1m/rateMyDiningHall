@@ -9,9 +9,19 @@
         </head>
     <body>
         <div id="top">
-            <a href="{% url 'index' %}">RateMyDiningHall</a>
+            <a href="{% url 'index' %}" id="home"> Rate My Dining Hall</a>
         </div>
-        {% block body %}
-        {% endblock body %}
+
+        <div id="mega">
+            <div id="wrapper">
+                {% block body %}
+                {% endblock body %}
+            </div>
+        </div>
+        
+
+        <div id="footer">
+            Developed in 2020 by Sam Kim
+        </div>
     </body>
 </html>

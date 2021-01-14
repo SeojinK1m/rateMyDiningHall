@@ -12,7 +12,7 @@
     {% for dininghall in diningHalls %}
     <li class="result">
         <a href="dininghalls/{{dininghall.urlName}}" class="linkToD">
-           {{dininghall.name}}, {{avgDRatings|getAvgRating:dininghall.name}}
+           {{dininghall.name}}
             <div class="stars" id="{{dininghall.urlName}}">
                 <script>
                     data_from_django = '{{ js_adr|safe }}';

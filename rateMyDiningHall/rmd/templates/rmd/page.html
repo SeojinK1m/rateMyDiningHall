@@ -2,6 +2,8 @@
 
 {% block body %}
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <h1 style="text-align: center;">Reviews for {{eatery.name}}...</h1>
 {% for review in reviews %}
 
@@ -10,11 +12,29 @@
         <div style="display: table-row">
             <div style="width: 6%; display: table-cell;"> 
                 {% load static %}
-                <img src="{% static 'rmd/plate.jpg' %}" style="width: 100%;"></img>
+                <img src="{% static 'rmd/plate.png' %}" style="width: 100%;"></img>
             </div>
             <div style="display: table-cell; width: 50%; vertical-align: middle;">
                 {{review.comment}}
-                <div>{{review.rating}}</div>
+                <div id='a{{review.id}}'>
+                    <script>
+                        data_from_django = '{{ json|safe }}';
+                        data_from_django = JSON.parse(data_from_django)
+                        rating = data_from_django['{{review.id}}']
+    
+                        for(let i=0; i<rating; i++) {
+                            let star = document.createElement('span')
+                            star.className = 'fa fa-star checked'
+                            document.querySelector('#a{{review.id}}').append(star)
+                        }
+                        for(let i=0; i<5-rating; i++){
+                            let star = document.createElement('span')
+                            star.className = 'fa fa-star'
+                            document.querySelector('#a{{review.id}}').append(star)
+                        }
+                    </script>
+                </div>
+                
             </div>
         </div>
     </div>
@@ -22,5 +42,8 @@
 
     
 {% endfor %}  
-<a href="{{eatery.urlName}}/add" style="text-align: center;">Add a review</a>
+<div id="aar" style="text-align: center; text-decoration: none; ">
+    Add a review <a href="{{eatery.urlName}}/add" style="text-align: center; text-decoration: none;">here</a>
+</div>
+
 {% endblock body %}

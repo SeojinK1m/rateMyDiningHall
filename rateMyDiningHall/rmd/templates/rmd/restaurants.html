@@ -9,8 +9,8 @@
 <ul class="results">
     {% for restaurant in restaurants %}
     <li class="result">
-        <a href="restaurants/{{restaurant.name}}">
-            {{restaurant.name}}, {{avgRRatings|getAvgRating:restaurant.name}}
+        <a href="restaurants/{{restaurant.urlName}}">
+            {{restaurant.name}}
             <div class="stars" id="{{restaurant.urlName}}">
                 <script>
                     data_from_django = '{{ js_arr|safe }}';
@@ -34,5 +34,5 @@
     </li>
     {% endfor %}
 </ul>
-<h3 class="subHeading">Don't see your dining hall? Add it <a href="restaurants/add">here</a></h3>
+<h3 class="subHeading">Don't see a restaurant? Add it <a href="restaurants/add">here</a></h3>
 {% endblock body %}

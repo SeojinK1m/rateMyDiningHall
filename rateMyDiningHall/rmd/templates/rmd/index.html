@@ -2,26 +2,33 @@
 
 {% block body %}
 {% load static %}
-<img src="{% static 'rmd/dininghall.jpg' %}"  id="dininghall">
-<form method="POST" class="search">
-    {% csrf_token %}
-    <input type="text" name="q" class="searchbar" placeholder="Search for a school, restaurant, or dining hall">
-    <div>
-        <input type="submit" value="search" class="searchButton">
-    </div>  
-</form>
+
+<div id="main">
+    <img src="{% static 'rmd/dininghall.jpg' %}"  id="dininghall">
+    <form method="POST" class="search">
+        {% csrf_token %}
+        <input type="text" name="q" class="searchbar" placeholder="Search for a school">
+        <div>
+            <input type="submit" value="search" class="searchButton">
+        </div>  
+    </form>
+</div>
 
 <div id="about" style="display: table;">
 
-    <div style="display: table-row">
-        <div style="width: 40%; display: table-cell;"> 
+    <div style="display: table-row" id="row">
+        <div style="width: 15%; display: table-cell;"> 
             {% load static %}
-            <img src="{% static 'rmd/plate.jpg' %}" style="width: 100%;"></img>
+            <img src="{% static 'rmd/plate.png' %}" style="width: 100%;"></img>
         </div>
-        <div style="display: table-cell; width: 50%; vertical-align: middle;">
-            <h3>
-                A Food Review Site For Students By Students
-            </h3>
+        <div style="display: table-cell; width: 30%; vertical-align: middle;">
+
+            <h1>
+                A better way to choose where to eat
+            </h1>
+            <h2>
+                Read student reviews and testimonies for dining halls and restaurants across colleges in America.
+            </h2>
         </div>
     </div>
 
@@ -29,8 +36,15 @@
 
 <h2 style="text-align: center;">Featured Schools</h2>
 <div id="featured">
-    <div class="block">1</div>
-    <div class="block">2</div>
-    <div class="block">3</div>
+    {% load static %}
+    <a href="WashingtonUniversity">
+        <div class="block" id="washu"></div>
+    </a>
+    <a href="GeorgiaTech">
+        <div class="block" id="gt"></div>
+    </a>
+    <a href="UCBerkeley">
+        <div class="block" id="berk"></div>
+    </a>
 </div>
 {% endblock body %}
